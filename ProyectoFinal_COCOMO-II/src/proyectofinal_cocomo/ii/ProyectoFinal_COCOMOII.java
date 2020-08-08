@@ -5,6 +5,8 @@
  */
 package proyectofinal_cocomo.ii;
 
+import proyectofinal_cocomo.ii.vista.frmPrincipal;
+
 /**
  *
  * @author xavie
@@ -16,6 +18,8 @@ public class ProyectoFinal_COCOMOII {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        frmPrincipal vista = new frmPrincipal();
+        vista.setVisible(true);
     }
     
 }
