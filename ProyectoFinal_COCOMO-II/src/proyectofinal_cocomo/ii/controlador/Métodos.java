@@ -24,10 +24,10 @@ import proyectofinal_cocomo.ii.vista.frmPrincipal;
 public class Métodos {
 
     
- JFileChooser seleccionar = new JFileChooser();
+ /*JFileChooser seleccionar = new JFileChooser();
  File archivo;
  FileInputStream entrada;
- FileOutputStream salida;
+ FileOutputStream salida;*/
  
  DecimalFormat df = new DecimalFormat("#.##");
  
@@ -120,7 +120,7 @@ public class Métodos {
         }else{
             factor = Double.parseDouble(frmPrincipal.lblTotal.getText())*(0.65+(0.01*sumFactor));
            // df.format(factor);
-        frmPrincipal.lblTotalPFA.setText(""+df.format(factor));
+        frmPrincipal.lblTotalPFA.setText(""+factor);
         }
         
     }
@@ -145,10 +145,9 @@ LENGUAJES  GRÁFICOS
         double ksloc = 0;
         int leng;
         switch (seleccion) {
-            case "JAVA":
-                leng = 20;
+            case "JAVA":leng = 20;
                 ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
-                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+                frmPrincipal.lblKsloc.setText("" +df.format(ksloc));
                 break;
 
             case "C":
@@ -218,7 +217,7 @@ LENGUAJES  GRÁFICOS
         } catch (Exception ex) {
             System.out.println(ex);
         }
-    }*/
+    }
     
     //Método para leer un archivo desde el computador   
     public String AbrirArchivo(File archivo){
@@ -233,7 +232,7 @@ LENGUAJES  GRÁFICOS
         } catch (Exception e) {
         }
         return documento;
-    }
+    }*/
      
      public void bloqueLetras(java.awt.event.KeyEvent evt){
      char F1 = evt.getKeyChar();

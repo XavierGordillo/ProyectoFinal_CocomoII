@@ -35,7 +35,6 @@ public class frmFa extends javax.swing.JFrame {
         model.addRow(new Object[]{"12. ¿Están incluidas en el diseño la conversión y la instalación?"});
         model.addRow(new Object[]{"13. ¿se ha diseñado el sistema para soportar múltiples instalaciones en diferentes organizaciones?"});
         model.addRow(new Object[]{"14. ¿Se ha diseñado la aplicación para facilitar los cambios y para ser fácilmente utilizada por el usuario?"});
-        
         tableFactor.setModel(model);
         
     }
