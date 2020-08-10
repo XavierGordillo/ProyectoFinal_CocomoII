@@ -10,9 +10,12 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.DecimalFormat;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import proyectofinal_cocomo.ii.vista.frmFa;
 import proyectofinal_cocomo.ii.vista.frmPrincipal;
+
 
 /**
  *
@@ -26,7 +29,7 @@ public class Métodos {
  FileInputStream entrada;
  FileOutputStream salida;
  
- 
+ DecimalFormat df = new DecimalFormat("#.##");
  
  int bajo[]={3,4,3,7,5};
  int medio[]={4,5,4,10,7};
@@ -91,7 +94,122 @@ public class Métodos {
         frmPrincipal.lblTotal.setText(""+sumTotal);
    }
    
-   
+   public void factorAjuste(){
+        int f1=0, f2=0,f3=0,f4=0,f5=0,f6=0,f7=0,f8=0,f9=0,f10=0,f11=0,f12=0,f13=0,f14=0;
+        int sumFactor;
+        double factor=0;
+        f1 = Integer.parseInt((String) frmFa.fa1.getSelectedItem());
+        //JOptionPane.showMessageDialog(null, "el valor de factor 1 es: "+f1);
+        f2 = Integer.parseInt((String) frmFa.fa2.getSelectedItem());
+        f3 = Integer.parseInt((String) frmFa.fa3.getSelectedItem());
+        f4 = Integer.parseInt((String) frmFa.fa4.getSelectedItem());
+        f5 = Integer.parseInt((String) frmFa.fa5.getSelectedItem());
+        f6 = Integer.parseInt((String) frmFa.fa6.getSelectedItem());
+        f7 = Integer.parseInt((String) frmFa.fa7.getSelectedItem());
+        f8 = Integer.parseInt((String) frmFa.fa8.getSelectedItem());
+        f9 = Integer.parseInt((String) frmFa.fa9.getSelectedItem());
+        f10 = Integer.parseInt((String) frmFa.fa10.getSelectedItem());
+        f11 = Integer.parseInt((String) frmFa.fa11.getSelectedItem());
+        f12 = Integer.parseInt((String) frmFa.fa12.getSelectedItem());
+        f13 = Integer.parseInt((String) frmFa.fa13.getSelectedItem());
+        f14 = Integer.parseInt((String) frmFa.fa14.getSelectedItem());
+        
+        sumFactor=f1+f2+f3+f4+f5+f6+f7+f8+f9+f10+f11+f12+f13+f14;
+        if (sumFactor == 0) {
+            
+        }else{
+            factor = Double.parseDouble(frmPrincipal.lblTotal.getText())*(0.65+(0.01*sumFactor));
+           // df.format(factor);
+        frmPrincipal.lblTotalPFA.setText(""+df.format(factor));
+        }
+        
+    }
+    
+          
+/*JAVA
+C
+C++
+C#
+COBOL
+PYTHON
+PHP
+ENSAMBLADOR
+PASCAL
+ADA
+LENGUAJES 4TA G.
+LENGUAJES OO.
+LENGUAJES  GRÁFICOS
+*/
+    public void calculoKlineas() {
+        String seleccion = (String) frmPrincipal.cbxLen.getSelectedItem();
+        double ksloc = 0;
+        int leng;
+        switch (seleccion) {
+            case "JAVA":
+                leng = 20;
+                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+                break;
+
+            case "C":
+                leng = 128;
+                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+                break;
+
+            case "C++":
+                leng = 64;
+                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+
+                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+                break;
+
+            case "COBOL":
+                leng = 105;
+                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+                break;
+
+            case "ENSAMBLADOR":
+                leng = 320;
+                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+                break;
+            case "PASCAL":
+                leng = 90;
+                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+                break;
+            case "ADA":
+                leng = 70;
+                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+                break;
+            case "LENGUAJES 4TA G.":
+                leng = 20;
+                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+                break;
+            case "LENGUAJES OO.":
+                leng = 30;
+                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+                break;
+            case "LENGUAJES  GRÁFICOS":
+                leng = 4;
+                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+                break;
+            default:
+                break;
+
+        }
+        /*if (seleccion.equals("JAVA")) {
+           ksloc = Double.parseDouble(frmGuardar.lblTotalPFA.getText())*20;
+           frmGuardar.lblKsloc.setText(""+ksloc);
+       }*/
+
+    }
     
    /* public void AbrirArchivo(String archivo){
         try {
