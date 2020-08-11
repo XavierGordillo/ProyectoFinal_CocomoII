@@ -92,7 +92,7 @@ public class Métodos {
             frmPrincipal.lbl5.setText(""+total5);
         }
         sumTotal=total+total2+total3+total4+total5; 
-        System.out.println("suma"+sumTotal);
+        //System.out.println("suma"+sumTotal);
         frmPrincipal.lblTotal.setText(""+sumTotal);
    }
    
@@ -131,11 +131,13 @@ public class Métodos {
     public void calculoKlineas() {
         String seleccion = (String) frmPrincipal.cbxLen.getSelectedItem();
         double ksloc;
+        double loc;
         int leng;
         switch (seleccion) {
             case "JAVA":leng = 20;
                 ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
-                frmPrincipal.lblKsloc.setText(""+ksloc);
+                loc = Math.round(ksloc*100)/100;
+                frmPrincipal.lblKsloc.setText(""+loc);
                 break;
 
             case "C":
@@ -200,7 +202,68 @@ public class Métodos {
     //Esfuerzo
     //------------------------------------------------------------------------------
     //Calculo Sumatoria de Factores de Escala
-    public double calculoFi(){
+    public void calculoFi(){
+       double sumFi;
+        double prec = Double.parseDouble((String)frmFactorescala.cbxPrec.getSelectedItem());
+        double flex = Double.parseDouble((String)frmFactorescala.cbxFlex.getSelectedItem());
+        double resl = Double.parseDouble((String)frmFactorescala.cbxResl.getSelectedItem());
+        double team = Double.parseDouble((String)frmFactorescala.cbxTeam.getSelectedItem());
+        double pmai = Double.parseDouble((String)frmFactorescala.cbxPmai.getSelectedItem());
+        sumFi = prec + flex + resl+team+pmai;
+        sumFi = Math.round(sumFi*100)/100;
+        frmPrincipal.lblFi.setText(""+sumFi);
+    }
+    
+    //Calculo de B 
+    public double calcularB(){
+        double b = 0.91 + (0.01*Double.parseDouble(frmPrincipal.lblFi.getText()));
+        //JOptionPane.showMessageDialog(null, "el numero es: "+b);
+        return b;
+    }
+    
+    public void calculoMi(){
+        double prodMi;
+        double prodR;
+        double rely = Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double data= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double docu= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double cplx= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double time= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double store= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double pvol= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double acap= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double aexp= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double pcap= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double pexp= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double ltex= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double pcon= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double tool= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double site= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double sced= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        prodMi = rely*data*docu*cplx*time*store*pvol*acap*aexp*pcap*pexp*ltex*pcon*tool*site*sced;
+        prodR = Math.round(prodMi*100)/100;
+       frmPrincipal.lblMi.setText(""+prodR);
+    }
+    
+    //Calculo de factor de Esfuerzo
+    public double calculoEsfuerzo(){
+        double A = 2.94;
+        double b = calcularB();
+        System.out.println("el valor de b es "+b);
+        double mi = Double.parseDouble(frmPrincipal.lblFi.getText());
+        double esfuerzo;
+        double lin = (Double.parseDouble(frmPrincipal.lblKsloc.getText()));
+        
+        esfuerzo = A *Math.pow(lin,b)*mi;
+        esfuerzo = Math.round(esfuerzo*1000)/1000;
+        JOptionPane.showMessageDialog(null, "Esfurzo ="+esfuerzo);
+        return esfuerzo;
+
+       
+    }
+    
+    
+   /* public double calculoFi(){
         double sumFi;
         double prec = Double.parseDouble((String)frmFactorescala.cbxPrec.getSelectedItem());
         double flex = Double.parseDouble((String)frmFactorescala.cbxFlex.getSelectedItem());
@@ -208,9 +271,13 @@ public class Métodos {
         double team = Double.parseDouble((String)frmFactorescala.cbxTeam.getSelectedItem());
         double pmai = Double.parseDouble((String)frmFactorescala.cbxPmai.getSelectedItem());
         sumFi = prec + flex + resl+team+pmai;
+        
         return sumFi;
+        
         //JOptionPane.showMessageDialog(null, +sumFi);
+        
     }
+    
     //-------------------------------------------------------------------------------
     //Calculo de B 
     public double calcularB(){
@@ -256,7 +323,7 @@ public class Métodos {
         return esfuerzo;
 
        
-    }
+    }*/
     
             
      public void bloqueLetras(java.awt.event.KeyEvent evt){
