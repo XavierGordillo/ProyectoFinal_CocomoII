@@ -6,10 +6,12 @@
 package proyectofinal_cocomo.ii.vista;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import proyectofinal_cocomo.ii.controlador.Métodos;
 import static proyectofinal_cocomo.ii.vista.frmFa.tableFactor;
 
 /**
@@ -23,6 +25,8 @@ public class frmFactorescala extends javax.swing.JFrame {
     /**
      * Creates new form frmFactorescala
      */
+    
+    Métodos met = new Métodos();
     public frmFactorescala() {
         initComponents();
         
@@ -89,7 +93,7 @@ public class frmFactorescala extends javax.swing.JFrame {
         columna.setMaxWidth(150);
         columna.setMinWidth(150);
         tablaFe.setRowHeight(40);
-        ;
+        
         
     }
     
@@ -106,11 +110,11 @@ public class frmFactorescala extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaFe = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        cbxPrec = new javax.swing.JComboBox<>();
+        cbxFlex = new javax.swing.JComboBox<>();
+        cbxResl = new javax.swing.JComboBox<>();
+        cbxPmai = new javax.swing.JComboBox<>();
+        cbxTeam = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
@@ -130,15 +134,15 @@ public class frmFactorescala extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaFe);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "6.20", "4.96", "3.72", "2.48", "1.24", "0.00" }));
+        cbxPrec.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "6.20", "4.96", "3.72", "2.48", "1.24", "0.00" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5.07", "4.05", "3.04", "2.03", "1.01", "0.00" }));
+        cbxFlex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5.07", "4.05", "3.04", "2.03", "1.01", "0.00" }));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "7.07", "5.65", "4.24", "2.83", "1.41", "0.00" }));
+        cbxResl.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "7.07", "5.65", "4.24", "2.83", "1.41", "0.00" }));
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "7.80", "6.24", "4.68", "3.12", "1.56", "0.00" }));
+        cbxPmai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "7.80", "6.24", "4.68", "3.12", "1.56", "0.00" }));
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5.48", "4.38", "3.29", "2.19", "1.10", "0.00" }));
+        cbxTeam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5.48", "4.38", "3.29", "2.19", "1.10", "0.00" }));
 
         jLabel1.setFont(new java.awt.Font("Lucida Sans Typewriter", 3, 11)); // NOI18N
         jLabel1.setText("Cuadro de ponderación de factores de escala(SFi)");
@@ -159,11 +163,11 @@ public class frmFactorescala extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 879, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxPrec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxFlex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxResl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxTeam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxPmai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(87, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -178,15 +182,15 @@ public class frmFactorescala extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxPrec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxFlex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxResl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxTeam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbxPmai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -202,6 +206,8 @@ public class frmFactorescala extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+       // met.calculoFi();
+        met.calcularB();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -241,12 +247,12 @@ public class frmFactorescala extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JComboBox<String> cbxFlex;
+    public static javax.swing.JComboBox<String> cbxPmai;
+    public static javax.swing.JComboBox<String> cbxPrec;
+    public static javax.swing.JComboBox<String> cbxResl;
+    public static javax.swing.JComboBox<String> cbxTeam;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaFe;

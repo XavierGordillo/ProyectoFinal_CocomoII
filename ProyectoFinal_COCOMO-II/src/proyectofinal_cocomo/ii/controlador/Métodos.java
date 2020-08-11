@@ -14,6 +14,8 @@ import java.text.DecimalFormat;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import proyectofinal_cocomo.ii.vista.frmFa;
+import proyectofinal_cocomo.ii.vista.frmFactorescala;
+import proyectofinal_cocomo.ii.vista.frmFactoresfuerzo;
 import proyectofinal_cocomo.ii.vista.frmPrincipal;
 
 
@@ -126,28 +128,14 @@ public class Métodos {
     }
     
           
-/*JAVA
-C
-C++
-C#
-COBOL
-PYTHON
-PHP
-ENSAMBLADOR
-PASCAL
-ADA
-LENGUAJES 4TA G.
-LENGUAJES OO.
-LENGUAJES  GRÁFICOS
-*/
     public void calculoKlineas() {
         String seleccion = (String) frmPrincipal.cbxLen.getSelectedItem();
-        double ksloc = 0;
+        double ksloc;
         int leng;
         switch (seleccion) {
             case "JAVA":leng = 20;
                 ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
-                frmPrincipal.lblKsloc.setText("" +df.format(ksloc));
+                frmPrincipal.lblKsloc.setText(""+ksloc);
                 break;
 
             case "C":
@@ -209,31 +197,68 @@ LENGUAJES  GRÁFICOS
        }*/
 
     }
-    
-   /* public void AbrirArchivo(String archivo){
-        try {
-            File objetofile = new File(archivo);
-            Desktop.getDesktop().open(objetofile);
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
+    //Esfuerzo
+    //------------------------------------------------------------------------------
+    //Calculo Sumatoria de Factores de Escala
+    public double calculoFi(){
+        double sumFi;
+        double prec = Double.parseDouble((String)frmFactorescala.cbxPrec.getSelectedItem());
+        double flex = Double.parseDouble((String)frmFactorescala.cbxFlex.getSelectedItem());
+        double resl = Double.parseDouble((String)frmFactorescala.cbxResl.getSelectedItem());
+        double team = Double.parseDouble((String)frmFactorescala.cbxTeam.getSelectedItem());
+        double pmai = Double.parseDouble((String)frmFactorescala.cbxPmai.getSelectedItem());
+        sumFi = prec + flex + resl+team+pmai;
+        return sumFi;
+        //JOptionPane.showMessageDialog(null, +sumFi);
+    }
+    //-------------------------------------------------------------------------------
+    //Calculo de B 
+    public double calcularB(){
+        double b = 0.91 + (0.01*calculoFi());
+        //JOptionPane.showMessageDialog(null, "el numero es: "+b);
+        return b;
     }
     
-    //Método para leer un archivo desde el computador   
-    public String AbrirArchivo(File archivo){
-        String documento ="";
-        try {
-            entrada = new FileInputStream(archivo);
-            int ascci;
-            while((ascci=entrada.read())!=-1){
-                char caracter = (char)ascci;
-                documento+=caracter;
-            }
-        } catch (Exception e) {
-        }
-        return documento;
-    }*/
-     
+    //calculo EMi
+    public double calculoMi(){
+        double prodMi;
+        double rely = Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double data= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double docu= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double cplx= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double time= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double store= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double pvol= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double acap= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double aexp= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double pcap= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double pexp= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double ltex= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double pcon= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double tool= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double site= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        double sced= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
+        prodMi = rely*data*docu*cplx*time*store*pvol*acap*aexp*pcap*pexp*ltex*pcon*tool*site*sced;
+        return prodMi;
+    }
+    
+    //Calculo de factor de Esfuerzo
+    public double calculoEsfuerzo(){
+        double A = 2.94;
+        double b = calcularB();
+        System.out.println("el valor de b es "+b);
+        double mi = calculoMi();
+        double esfuerzo;
+        double lin = (Double.parseDouble(frmPrincipal.lblKsloc.getText()));
+        
+        esfuerzo = A *Math.pow(lin,b)*mi;
+        JOptionPane.showMessageDialog(null, "Esfurzo ="+esfuerzo);
+        return esfuerzo;
+
+       
+    }
+    
+            
      public void bloqueLetras(java.awt.event.KeyEvent evt){
      char F1 = evt.getKeyChar();
         if (Character.isLetter(F1)){
