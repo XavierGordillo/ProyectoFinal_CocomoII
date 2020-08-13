@@ -136,7 +136,7 @@ public class Métodos {
         switch (seleccion) {
             case "JAVA":leng = 20;
                 ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
-                loc = Math.round(ksloc*100)/100;
+                loc = Math.rint(ksloc*100)/100;
                 frmPrincipal.lblKsloc.setText(""+loc);
                 break;
 
