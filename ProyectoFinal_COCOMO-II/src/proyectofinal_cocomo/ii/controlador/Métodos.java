@@ -37,6 +37,7 @@ public class Métodos {
  int medio[]={4,5,4,10,7};
  int alto[]={6,7,6,15,10};
  
+ 
 
     public Métodos() {
     }
@@ -47,14 +48,20 @@ public class Métodos {
         int b1= 0 , b2= 0 , b3= 0, b4= 0, b5= 0, m1= 0, m2= 0,m3= 0,
                 m4=0,m5= 0,a1= 0,a2= 0,a3= 0,a4= 0,a5 = 0;
         
-        if (frmPrincipal.txtF.getText()!=null||frmPrincipal.txtF2.getText()!=null||frmPrincipal.txtF3.getText()!=null) {
+       // try {
+       
+       
+       
+       if ((frmPrincipal.txtF.getText()!=null)||frmPrincipal.txtF2.getText()!=null||frmPrincipal.txtF3.getText()!=null) {
+            
             b1 = Integer.parseInt(frmPrincipal.txtF.getText())*bajo[0];
             m1 = Integer.parseInt(frmPrincipal.txtF2.getText())*medio[0];
             a1 = Integer.parseInt(frmPrincipal.txtF3.getText())*alto[0];
             total = b1+m1+a1;
             //String numTotal= total+"";
             frmPrincipal.lbl1.setText(""+total);
-        }
+
+       }
         
         if (frmPrincipal.txtF4.getText()!=null||frmPrincipal.txtF5.getText()!=null||frmPrincipal.txtF6.getText()!=null) {
             b2 = Integer.parseInt(frmPrincipal.txtF4.getText())*bajo[1];
@@ -94,6 +101,16 @@ public class Métodos {
         sumTotal=total+total2+total3+total4+total5; 
         //System.out.println("suma"+sumTotal);
         frmPrincipal.lblTotal.setText(""+sumTotal);
+        
+        
+         /*
+        
+        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ingresa valores correctos");
+        }
+        */
+       
    }
    
    public void factorAjuste(){
@@ -212,6 +229,8 @@ public class Métodos {
         sumFi = prec + flex + resl+team+pmai;
         sumFi = Math.round(sumFi*100)/100;
         frmPrincipal.lblFi.setText(""+sumFi);
+        
+        
     }
     
     //Calculo de B 
@@ -242,7 +261,7 @@ public class Métodos {
         double sced= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
         prodMi = rely*data*docu*cplx*time*store*pvol*acap*aexp*pcap*pexp*ltex*pcon*tool*site*sced;
         prodR = Math.round(prodMi*100)/100;
-       frmPrincipal.lblMi.setText(""+prodR);
+        frmPrincipal.lblMi.setText(""+prodR);
     }
     
     //Calculo de factor de Esfuerzo
@@ -256,10 +275,28 @@ public class Métodos {
         
         esfuerzo = A *Math.pow(lin,b)*mi;
         esfuerzo = Math.round(esfuerzo*1000)/1000;
-        JOptionPane.showMessageDialog(null, "Esfurzo ="+esfuerzo);
+        //JOptionPane.showMessageDialog(null, "Esfurzo ="+esfuerzo);
+        
+        //imprimiendo en pantalla
+         
+        
+        frmPrincipal.lblEsfuerzo.setText(""+esfuerzo+" Personas/mes");
+        
+        tiempoD_cantidadP(esfuerzo);
+        
         return esfuerzo;
-
-       
+  
+    }
+    
+    public void tiempoD_cantidadP(double esfuerzo){
+        double tiempoDes = 0.0;
+         tiempoDes = 3.76*Math.pow(esfuerzo, 0.28+0.002*(Double.parseDouble(frmPrincipal.lblFi.getText())));
+         frmPrincipal.lblTiempoD.setText(""+tiempoDes+" meses");
+         
+         double cantidadPersonas = 0.0;
+         cantidadPersonas = esfuerzo/tiempoDes;
+         frmPrincipal.lblCantidadP.setText(cantidadPersonas+" personas");
+    
     }
     
     
@@ -331,6 +368,9 @@ public class Métodos {
         if (Character.isLetter(F1)){
             evt.consume();
             JOptionPane.showMessageDialog(null, "Ingresar solo numeros");
+        }if(Character.isWhitespace(F1)){
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "El espacio esta vacio");
         }
      }
 }

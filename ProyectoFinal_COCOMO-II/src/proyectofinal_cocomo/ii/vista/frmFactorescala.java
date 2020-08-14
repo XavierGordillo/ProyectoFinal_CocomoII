@@ -210,6 +210,12 @@ public class frmFactorescala extends javax.swing.JFrame {
        // met.calcularB();
        met.calculoFi();
         this.dispose();
+        
+        //llamar al jFrame Factor esfuerzo
+        frmFactoresfuerzo fes = new frmFactoresfuerzo();
+        fes.setVisible(true);
+        met.calculoMi();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

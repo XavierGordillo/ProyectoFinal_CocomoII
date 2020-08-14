@@ -418,6 +418,9 @@ public class frmFactoresfuerzo extends javax.swing.JFrame {
       
         met.calculoMi();
         this.dispose();
+        
+        //llamar a calcular esfuerzo
+        met.calculoEsfuerzo();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
