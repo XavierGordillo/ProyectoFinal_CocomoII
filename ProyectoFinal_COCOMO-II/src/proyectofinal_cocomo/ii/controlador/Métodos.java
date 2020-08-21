@@ -10,6 +10,8 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -31,7 +33,7 @@ public class Métodos {
  FileInputStream entrada;
  FileOutputStream salida;*/
  
- DecimalFormat df = new DecimalFormat("#.##");
+ //DecimalFormat df = new DecimalFormat("#.##");
  
  int bajo[]={3,4,3,7,5};
  int medio[]={4,5,4,10,7};
@@ -42,6 +44,16 @@ public class Métodos {
     public Métodos() {
     }
 
+    
+    //<etodopara redondear decimales
+    public BigDecimal r(double n) {
+        BigDecimal bd = new BigDecimal(n);
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        bd.doubleValue();
+        //System.out.println("" + bd.doubleValue());
+        return bd;
+    }
+
     //Método para obtener lo que se ingresa en el TextField y presentarlo en un label
     public void datos(){
         int total=0, total2=0, total3=0, total4=0, total5=0, sumTotal=0;
@@ -49,8 +61,6 @@ public class Métodos {
                 m4=0,m5= 0,a1= 0,a2= 0,a3= 0,a4= 0,a5 = 0;
         
        // try {
-       
-       
        
        if ((frmPrincipal.txtF.getText()!=null)||frmPrincipal.txtF2.getText()!=null||frmPrincipal.txtF3.getText()!=null) {
             
@@ -139,7 +149,10 @@ public class Métodos {
         }else{
             factor = Double.parseDouble(frmPrincipal.lblTotal.getText())*(0.65+(0.01*sumFactor));
            // df.format(factor);
-        frmPrincipal.lblTotalPFA.setText(""+factor);
+           //BigDecimal bd = new BigDecimal(factor);
+                //bd = bd.setScale(2, RoundingMode.HALF_UP);
+            BigDecimal factorF =   r(factor);
+        frmPrincipal.lblTotalPFA.setText(""+factorF);
         }
         
     }
@@ -148,63 +161,73 @@ public class Métodos {
     public void calculoKlineas() {
         String seleccion = (String) frmPrincipal.cbxLen.getSelectedItem();
         double ksloc;
-        double loc;
+        BigDecimal kslocF;
         int leng;
         switch (seleccion) {
             case "JAVA":leng = 20;
                 ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
-                loc = Math.rint(ksloc*100)/100;
-                frmPrincipal.lblKsloc.setText(""+loc);
+                //BigDecimal bd = new BigDecimal(ksloc);
+                //bd = bd.setScale(2, RoundingMode.HALF_UP);
+                  kslocF=r(ksloc);
+                frmPrincipal.lblKsloc.setText(""+kslocF);
                 break;
 
             case "C":
                 leng = 128;
                 ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
-                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+                kslocF=r(ksloc);
+                frmPrincipal.lblKsloc.setText(""+kslocF);
                 break;
 
             case "C++":
                 leng = 64;
                 ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
-
-                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+                kslocF=r(ksloc);
+                frmPrincipal.lblKsloc.setText(""+kslocF);
                 break;
 
             case "COBOL":
                 leng = 105;
                 ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
-                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+                kslocF=r(ksloc);
+                frmPrincipal.lblKsloc.setText(""+kslocF);
                 break;
 
             case "ENSAMBLADOR":
                 leng = 320;
                 ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
-                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+               kslocF=r(ksloc);
+                frmPrincipal.lblKsloc.setText(""+kslocF);
                 break;
             case "PASCAL":
                 leng = 90;
                 ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
-                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+                kslocF=r(ksloc);
+                frmPrincipal.lblKsloc.setText(""+kslocF);
                 break;
             case "ADA":
                 leng = 70;
                 ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
-                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+                kslocF=r(ksloc);
+                frmPrincipal.lblKsloc.setText(""+kslocF);
                 break;
             case "LENGUAJES 4TA G.":
                 leng = 20;
                 ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
-                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+               kslocF=r(ksloc);
+                frmPrincipal.lblKsloc.setText(""+kslocF);
                 break;
             case "LENGUAJES OO.":
                 leng = 30;
                 ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
-                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+               kslocF=r(ksloc);
+                frmPrincipal.lblKsloc.setText(""+kslocF);
                 break;
             case "LENGUAJES  GRÁFICOS":
                 leng = 4;
                 ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
-                frmPrincipal.lblKsloc.setText("" + df.format(ksloc));
+                kslocF=r(ksloc);
+                frmPrincipal.lblKsloc.setText(""+kslocF);
                 break;
             default:
                 break;
@@ -227,8 +250,8 @@ public class Métodos {
         double team = Double.parseDouble((String)frmFactorescala.cbxTeam.getSelectedItem());
         double pmai = Double.parseDouble((String)frmFactorescala.cbxPmai.getSelectedItem());
         sumFi = prec + flex + resl+team+pmai;
-        sumFi = Math.round(sumFi*100)/100;
-        frmPrincipal.lblFi.setText(""+sumFi);
+        BigDecimal sumFiF =r(sumFi);
+        frmPrincipal.lblFi.setText(""+sumFiF);
         
         
     }
@@ -242,7 +265,7 @@ public class Métodos {
     
     public void calculoMi(){
         double prodMi;
-        double prodR;
+        BigDecimal prodMif;
         double rely = Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
         double data= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
         double docu= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
@@ -260,43 +283,51 @@ public class Métodos {
         double site= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
         double sced= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
         prodMi = rely*data*docu*cplx*time*store*pvol*acap*aexp*pcap*pexp*ltex*pcon*tool*site*sced;
-        prodR = Math.round(prodMi*100)/100;
-        frmPrincipal.lblMi.setText(""+prodR);
+        //prodR = Math.round(prodMi*100)/100;
+        prodMif = r(prodMi);
+        frmPrincipal.lblMi.setText(""+prodMif);
     }
     
     //Calculo de factor de Esfuerzo
     public double calculoEsfuerzo(){
         double A = 2.94;
         double b = calcularB();
-        System.out.println("el valor de b es "+b);
+        //System.out.println("el valor de b es "+b);
         double mi = Double.parseDouble(frmPrincipal.lblFi.getText());
         double esfuerzo;
         double lin = (Double.parseDouble(frmPrincipal.lblKsloc.getText()));
-        
         esfuerzo = A *Math.pow(lin,b)*mi;
-        esfuerzo = Math.round(esfuerzo*1000)/1000;
+//        esfuerzo = Math.round(esfuerzo*1000)/1000;
+        BigDecimal esfuerzoF = r(esfuerzo);
         //JOptionPane.showMessageDialog(null, "Esfurzo ="+esfuerzo);
-        
         //imprimiendo en pantalla
-         
+        frmPrincipal.lblEsfuerzo.setText(""+esfuerzoF+" Personas/mes");
         
-        frmPrincipal.lblEsfuerzo.setText(""+esfuerzo+" Personas/mes");
-        
-        tiempoD_cantidadP(esfuerzo);
+        //tiempoD_cantidadP(esfuerzo);
         
         return esfuerzo;
   
     }
     
     public void tiempoD_cantidadP(double esfuerzo){
-        double tiempoDes = 0.0;
+        double tiempoDes;
          tiempoDes = 3.76*Math.pow(esfuerzo, 0.28+0.002*(Double.parseDouble(frmPrincipal.lblFi.getText())));
-         frmPrincipal.lblTiempoD.setText(""+tiempoDes+" meses");
+         BigDecimal tiempoDesf = r(tiempoDes );
+         frmPrincipal.lblTiempoD.setText(""+tiempoDesf+" meses");
          
-         double cantidadPersonas = 0.0;
+         double cantidadPersonas;
          cantidadPersonas = esfuerzo/tiempoDes;
-         frmPrincipal.lblCantidadP.setText(cantidadPersonas+" personas");
+         BigDecimal cantidadPersonasf =r(cantidadPersonas);
+         frmPrincipal.lblCantidadP.setText(cantidadPersonasf+" personas");
     
+    }
+    
+    public void calculoCosto(){
+        double imprevitos;
+        double costoTotal;
+        imprevitos = Double.parseDouble(frmPrincipal.txtFSueldo.getText())*(Double.parseDouble(frmPrincipal.lblTiempoD.getText())*1.25)*(Double.parseDouble(frmPrincipal.lblCantidadP.getText()))*0.10;
+        costoTotal= Double.parseDouble(frmPrincipal.txtFSueldo.getText())*(Double.parseDouble(frmPrincipal.lblTiempoD.getText())*1.25)*(Double.parseDouble(frmPrincipal.lblCantidadP.getText()))+imprevitos;
+        frmPrincipal.lblCosto.setText(""+costoTotal);
     }
     
     
