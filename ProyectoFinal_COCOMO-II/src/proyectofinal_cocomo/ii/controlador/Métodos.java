@@ -50,7 +50,7 @@ public class Métodos {
         BigDecimal bd = new BigDecimal(n);
         bd = bd.setScale(2, RoundingMode.HALF_UP);
         bd.doubleValue();
-        //System.out.println("" + bd.doubleValue());
+        
         return bd;
     }
 
@@ -301,33 +301,86 @@ public class Métodos {
         BigDecimal esfuerzoF = r(esfuerzo);
         //JOptionPane.showMessageDialog(null, "Esfurzo ="+esfuerzo);
         //imprimiendo en pantalla
-        frmPrincipal.lblEsfuerzo.setText(""+esfuerzoF+" Personas/mes");
+        frmPrincipal.lblEsfuerzo.setText(""+esfuerzoF+" Per./mes");
         
         //tiempoD_cantidadP(esfuerzo);
+        
+        
+        
+        double factorEscala = Double.parseDouble(frmPrincipal.lblFi.getText());//obtengo factor escala de la vista principal
+        
+        //para pruebas
+        BigDecimal tiempoDesarrollo = tiempoD_cantidadP(esfuerzo,factorEscala);
+        
         
         return esfuerzo;
   
     }
     
-    public void tiempoD_cantidadP(double esfuerzo){
+    public BigDecimal tiempoD_cantidadP(double esfuerzo, double factorEsacla){
         double tiempoDes;
-         tiempoDes = 3.76*Math.pow(esfuerzo, 0.28+0.002*(Double.parseDouble(frmPrincipal.lblFi.getText())));
+         //tiempoDes = 3.76*Math.pow(esfuerzo, 0.28+0.002*(Double.parseDouble(frmPrincipal.lblFi.getText())));
+         tiempoDes = 3.76*Math.pow(esfuerzo, 0.28+0.002*(factorEsacla));
          BigDecimal tiempoDesf = r(tiempoDes );
-         frmPrincipal.lblTiempoD.setText(""+tiempoDesf+" meses");
-         
+        //frmPrincipal.lblTiempoD.setText(""+tiempoDesf+" meses");
+        
+        
          double cantidadPersonas;
          cantidadPersonas = esfuerzo/tiempoDes;
          BigDecimal cantidadPersonasf =r(cantidadPersonas);
-         frmPrincipal.lblCantidadP.setText(cantidadPersonasf+" personas");
-    
+       // frmPrincipal.lblCantidadP.setText(cantidadPersonasf+" personas");
+         
+        // calculoCosto(tiempoDes, cantidadPersonas);
+         
+         //para pruebas
+         return tiempoDesf;
+    }
+    public int suma(int a, int b){
+        //int b =7;
+        int suma = 0;
+        if(a > 0){
+            
+            suma = b+a;
+            
+        }else{}
+        return suma;
     }
     
-    public void calculoCosto(){
+    
+    
+    public void calculoCosto(double tiempo, double cantidadPers){
         double imprevitos;
+        double costo;
         double costoTotal;
-        imprevitos = Double.parseDouble(frmPrincipal.txtFSueldo.getText())*(Double.parseDouble(frmPrincipal.lblTiempoD.getText())*1.25)*(Double.parseDouble(frmPrincipal.lblCantidadP.getText()))*0.10;
+        //pedir el salario
+        String sueldo = JOptionPane.showInputDialog(null, "¿Cual es el salario?");
+        
+        //controlar si es double
+        Boolean esDouble = false;
+         while (esDouble ==false)
+         {
+             try {
+		Double.parseDouble(sueldo);
+		esDouble = true;
+                } catch (NumberFormatException nfe){
+                    sueldo = JOptionPane.showInputDialog(null, "Ingrese el salario correctamente! El salario debe ser tipo '350.00'");
+                }
+         }
+        
+        //costo = Double.parseDouble(sueldo)*(Double.parseDouble(frmPrincipal.lblTiempoD.getText())*1.25)*(Double.parseDouble(frmPrincipal.lblCantidadP.getText()));
+        costo = Double.parseDouble(sueldo)*(tiempo*1.25)*(cantidadPers);
+        BigDecimal costoR = r(costo);
+        frmPrincipal.lblCosto.setText(""+costoR);
+        imprevitos = costo * 0.35;
+        BigDecimal imprevitosR = r(imprevitos);
+        frmPrincipal.lblImprevistos.setText(""+imprevitosR);
+        costoTotal = costo + imprevitos;
+        BigDecimal costoTotalR = r(costoTotal);
+        frmPrincipal.lblCostoT.setText(""+costoTotalR);
+        
+       /* imprevitos = Double.parseDouble(frmPrincipal.txtFSueldo.getText())*(Double.parseDouble(frmPrincipal.lblTiempoD.getText())*1.25)*(Double.parseDouble(frmPrincipal.lblCantidadP.getText()))*0.10;
         costoTotal= Double.parseDouble(frmPrincipal.txtFSueldo.getText())*(Double.parseDouble(frmPrincipal.lblTiempoD.getText())*1.25)*(Double.parseDouble(frmPrincipal.lblCantidadP.getText()))+imprevitos;
-        frmPrincipal.lblCosto.setText(""+costoTotal);
+        frmPrincipal.lblCosto.setText(""+costoTotal);*/
     }
     
     
