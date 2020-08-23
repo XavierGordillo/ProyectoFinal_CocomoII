@@ -165,90 +165,101 @@ public class Métodos {
         }
 
     }
-
-    public void calculoKlineas() {
-        String seleccion = (String) frmPrincipal.cbxLen.getSelectedItem();
+    
+    
+    /**
+     * Este metodo nos calcula las Klineas segun el lenguaje de programaci[on
+     * que se vaya a utilizar, recibe los parametros de 
+     * @param seleccion sirve para saver el lenguaje sellecionado
+     * @param totalPFA son los puntos de funcion para hacer el calculo
+     * @return el calculo de Jlineas
+     */
+    public BigDecimal calculoKlineas(String seleccion, double totalPFA) {
+       // String seleccion = (String) frmPrincipal.cbxLen.getSelectedItem();
         double ksloc;
-        BigDecimal kslocF;
+        //inicializar el bigdecimal
+        BigDecimal kslocF = new BigDecimal(0);;
         int leng;
         switch (seleccion) {
             case "JAVA":
                 leng = 20;
-                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                ksloc = (totalPFA * leng) / 1000;
+                
                 //BigDecimal bd = new BigDecimal(ksloc);
                 //bd = bd.setScale(2, RoundingMode.HALF_UP);
                 kslocF = r(ksloc);
                 frmPrincipal.lblKsloc.setText("" + kslocF);
+                
                 break;
 
             case "C":
                 leng = 128;
-                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                ksloc = (totalPFA * leng) / 1000;
                 kslocF = r(ksloc);
                 frmPrincipal.lblKsloc.setText("" + kslocF);
                 break;
 
             case "C++":
                 leng = 64;
-                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                ksloc = (totalPFA * leng) / 1000;
                 kslocF = r(ksloc);
                 frmPrincipal.lblKsloc.setText("" + kslocF);
                 break;
 
             case "COBOL":
                 leng = 105;
-                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                ksloc = (totalPFA * leng) / 1000;
                 kslocF = r(ksloc);
                 frmPrincipal.lblKsloc.setText("" + kslocF);
                 break;
 
             case "ENSAMBLADOR":
                 leng = 320;
-                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                ksloc = (totalPFA * leng) / 1000;
                 kslocF = r(ksloc);
                 frmPrincipal.lblKsloc.setText("" + kslocF);
                 break;
             case "PASCAL":
                 leng = 90;
-                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                ksloc = (totalPFA * leng) / 1000;
                 kslocF = r(ksloc);
                 frmPrincipal.lblKsloc.setText("" + kslocF);
                 break;
             case "ADA":
                 leng = 70;
-                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                ksloc = (totalPFA * leng) / 1000;
                 kslocF = r(ksloc);
                 frmPrincipal.lblKsloc.setText("" + kslocF);
                 break;
             case "LENGUAJES 4TA G.":
                 leng = 20;
-                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                ksloc = (totalPFA * leng) / 1000;
                 kslocF = r(ksloc);
                 frmPrincipal.lblKsloc.setText("" + kslocF);
                 break;
             case "LENGUAJES OO.":
                 leng = 30;
-                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                ksloc = (totalPFA * leng) / 1000;
                 kslocF = r(ksloc);
                 frmPrincipal.lblKsloc.setText("" + kslocF);
                 break;
             case "LENGUAJES  GRÁFICOS":
                 leng = 4;
-                ksloc = (Double.parseDouble(frmPrincipal.lblTotalPFA.getText()) * leng) / 1000;
+                ksloc = (totalPFA * leng) / 1000;
                 kslocF = r(ksloc);
                 frmPrincipal.lblKsloc.setText("" + kslocF);
                 break;
             default:
                 break;
-
+            
         }
+        return kslocF;
         /*if (seleccion.equals("JAVA")) {
            ksloc = Double.parseDouble(frmGuardar.lblTotalPFA.getText())*20;
            frmGuardar.lblKsloc.setText(""+ksloc);
        }*/
 
     }
-
     //Esfuerzo
     //------------------------------------------------------------------------------
     //Calculo Sumatoria de Factores de Escala
@@ -317,7 +328,12 @@ public class Métodos {
         // JOptionPane.showMessageDialog(null, "Factor Complejo"+prodMif);
     }
 
-    //Calculo de factor de Esfuerzo
+    
+    /**Calculo de factor de Esfuerzo
+     * Para calcular el esfuerzo se hace uso de la formula Cocomo II de esfuerzo,
+     * recibe parametros como factorEsfuerzo, la costante 2.94, el calculo b
+     * @return el campo esfuerzo en la vista principal
+     */
     public double calculoEsfuerzo() {
         double A = 2.94;
         double b = calcularB();
@@ -356,29 +372,32 @@ public class Métodos {
         //tiempoDes = 3.76*Math.pow(esfuerzo, 0.28+0.002*(Double.parseDouble(frmPrincipal.lblFi.getText())));
         tiempoDes = 3.76 * Math.pow(esfuerzo, 0.28 + 0.002 * (factorEsacla));
         BigDecimal tiempoDesf = r(tiempoDes);
-        frmPrincipal.lblTiempoD.setText("" + tiempoDesf + " meses");
+        String tiempoTrans = redondearP(tiempoDes);
+       frmPrincipal.lblTiempoD.setText("" + tiempoTrans + " meses");
 
         double cantidadPersonas;
         cantidadPersonas = esfuerzo / tiempoDes;
         BigDecimal cantidadPersonasf = r(cantidadPersonas);
-        frmPrincipal.lblCantidadP.setText(cantidadPersonasf + " personas");
+        String personasTrnsf = redondearP(cantidadPersonas);
+        frmPrincipal.lblCantidadP.setText(personasTrnsf + " personas");
 
         calculoCosto(tiempoDes, cantidadPersonas);
 
         //para pruebas
         return tiempoDesf;
     }
-
-    public int suma(int a, int b) {
+/**
+ * Esta funcion nos sirve para redondear las personas y el tiempo de desarrollo,
+ * por ejemplo si se recibe 3,4 meses, la funcion retornara que el proyecto 
+ * se lo debe realizar de 3 a 4 meses, recibe como parametro
+ * @param a = double de personas y meses
+ * @return una string de entero
+ */
+    public String redondearP(double a) {
         //int b =7;
-        int suma = 0;
-        if (a > 0) {
-
-            suma = b + a;
-
-        } else {
-        }
-        return suma;
+        int aux =(int)a+1;
+        String b = (int)a+" a " +aux; 
+        return b;
     }
 
     /**
@@ -390,7 +409,7 @@ public class Métodos {
      * personas, variables que son necesarias para aplicar la fórmula
      * correspondiente del costo y poder determinar su valor. z
      */
-    public void calculoCosto(double tiempo, double cantidadPers) {
+    public double calculoCosto(double tiempo, double cantidadPers) {
         double imprevitos;
         double costo;
         double costoTotal;
@@ -419,6 +438,7 @@ public class Métodos {
         BigDecimal costoTotalR = r(costoTotal);
         frmPrincipal.lblCostoT.setText("" + costoTotalR);
 
+        return costoTotal;
     }
 
     /**

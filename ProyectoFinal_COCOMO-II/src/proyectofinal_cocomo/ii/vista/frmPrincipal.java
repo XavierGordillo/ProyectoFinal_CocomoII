@@ -889,7 +889,11 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * este boton nos sirve para guardar y generar un pdf 
+     * @param evt al accionarlo se generara un pdf con los campos que fueron calculados
+     * por el programa
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         List<Reporte>datosReporte = new ArrayList<Reporte>();
         Reporte report = new Reporte(
@@ -951,14 +955,24 @@ public class frmPrincipal extends javax.swing.JFrame {
         //Document documento = new Document();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * este botos nos sirve para calcular las kSlock
+     * @param evt al accionar llamara a la funcion que realiza el calculo
+     * tomando en cuenta el lenguaje de programacion
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        met.calculoKlineas();
+       //se le envia el item seleccionado por el usuario y el total de puntos de funcion ajustados
+        met.calculoKlineas((String)cbxLen.getSelectedItem(), Double.parseDouble(lblTotalPFA.getText()));
         jButton3.setEnabled(false);
         cbxLen.setEnabled(false);
         jButton5.setEnabled(true);
     }//GEN-LAST:event_jButton3ActionPerformed
-
+/**
+ * Este boton nos sirve para calcular los puntos de funcion ajustados
+ * @param evt al accionar el boton, llamara a otro jframe el cual contiene
+ * los valores para ajustar los puntos de funcion
+ */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         frmFa fa = new frmFa();
@@ -991,6 +1005,12 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtFActionPerformed
 
+    /**
+     * Este boton nos sirve para calcular los funtos de funcion sin ajustar
+     * @param evt al accionarlo tambien habilitara otro boton para continuar 
+     * con los calculos asi como tambien desabilitara otros campos
+     * 
+     */
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
          met.datos();
@@ -1010,7 +1030,11 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void txtFnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFnombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFnombreActionPerformed
-
+    /**
+     * Este boton nos sirve para llamar a las funciones que realizaran los calculos
+     * necesarios 
+     * @param evt al accionarlo se realizaran calculos y se llamaran a otros jframe
+     */
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         frmFactorescala fe = new frmFactorescala();
         fe.setVisible(true);
@@ -1034,6 +1058,11 @@ public class frmPrincipal extends javax.swing.JFrame {
      */
     }//GEN-LAST:event_txtFnombreKeyTyped
 
+    /**
+     * Esta funcion nos sirve para fuardar los campos del proyecto como nomnbre,
+     * tipo y modulo a estimar
+     * @param evt se acciona al dar click en el boton siguiente
+     */
     private void jButtonNombresPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNombresPActionPerformed
         // TODO add your handling code here:
         if(txtFnombre.getText().length()!=0&&txtFmodulo.getText().length()!=0&&txtFtipo.getText().length()!=0){
@@ -1051,7 +1080,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButtonNombresPActionPerformed
-
+/**
+ * esta funcion nos sirve para cancelar todas las acciones del programa
+ * @param evt al accionarlo se borrara todos los campos del programa
+ * y se volvera a los campos iniciales
+ */
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         
@@ -1147,7 +1180,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
          met.bloqueLetras(evt);
     }//GEN-LAST:event_txtF15KeyTyped
-
+/**
+ * Este boton nos sirve para cerrar la aplicacion
+ * @param evt al accionarlo detendra todo el programa y los procesos
+ */
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
         this.dispose();
