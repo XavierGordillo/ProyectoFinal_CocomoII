@@ -4,8 +4,21 @@
  * and open the template in the editor.
  */
 package proyectofinal_cocomo.ii.vista;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Font;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import proyectofinal_cocomo.ii.controlador.Métodos;
+import proyectofinal_cocomo.ii.modelo.Reporte;
 
 /**
  *
@@ -30,7 +43,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     public void desactivarTodosBotones(){
     
         // botones desactivados
-        jButton9.setEnabled(false); jButton2.setEnabled(false); jButton3.setEnabled(false); jButton5.setEnabled(false); jButton1.setEnabled(false);
+        jButton9.setEnabled(false); jButton2.setEnabled(false); jButton3.setEnabled(false); jButton5.setEnabled(false); //jButton1.setEnabled(false);
         //campos desactivados
         txtF.setEditable(false); txtF2.setEditable(false);txtF3.setEditable(false);txtF4.setEditable(false);txtF5.setEditable(false); txtF6.setEditable(false);
         txtF7.setEditable(false);txtF8.setEditable(false);txtF9.setEditable(false);txtF10.setEditable(false);txtF11.setEditable(false);txtF12.setEditable(false);
@@ -878,7 +891,64 @@ public class frmPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        List<Reporte>datosReporte = new ArrayList<Reporte>();
+        Reporte report = new Reporte(
+                txtFnombre.getText(), 
+                txtFtipo.getText(), 
+                txtFmodulo.getText(), 
+                lblTotal.getText(),
+                lblTotalPFA.getText(),
+                lblKsloc.getText(),
+                lblEsfuerzo.getText(),
+                lblTiempoD.getText(),
+                lblCantidadP.getText(),
+                lblCostoT.getText());
+        datosReporte.add(report);
+                
+        JFileChooser dlg = new JFileChooser();
+        int Option = dlg.showSaveDialog(this);
+        if (Option==JFileChooser.APPROVE_OPTION) {
+            File f =dlg.getSelectedFile();
+            String fl =f.toString();
+            try {
+            FileOutputStream archivo = new FileOutputStream(fl+".pdf");
+            Document doc = new Document();
+            PdfWriter.getInstance(doc, archivo);
+            doc.open();
+            Paragraph título = new Paragraph("Estimación de Costo Puntos de Función \n\n",
+                    FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.BLUE));
+            doc.add(título);
+            PdfPTable tabla = new PdfPTable(10);
+            tabla.addCell("Nombre");
+            tabla.addCell("Tipo");
+            tabla.addCell("Módulo");
+            tabla.addCell("PFSA");
+            tabla.addCell("PFA");
+            tabla.addCell("KSLOC");tabla.addCell("Esfuezo");
+            tabla.addCell("T. Desarrollo");tabla.addCell("# Personas");tabla.addCell("Costo");
+                for (int i = 0; i < datosReporte.size(); i++) {
+                    //tabla.addCell(""+i);
+                        tabla.addCell(datosReporte.get(i).getNombre());
+                        tabla.addCell(datosReporte.get(i).getTipo());
+                        tabla.addCell(datosReporte.get(i).getModulo());
+                        tabla.addCell(datosReporte.get(i).getPf());
+                        tabla.addCell(datosReporte.get(i).getPfa());
+                        tabla.addCell(datosReporte.get(i).getKsloc());
+                        tabla.addCell(datosReporte.get(i).getEsfuerzo());
+                        tabla.addCell(datosReporte.get(i).gettDesarrollo());
+                        tabla.addCell(datosReporte.get(i).getcPersonas());
+                        tabla.addCell(datosReporte.get(i).getcTotal());
+                }
+                doc.add(tabla);
+            doc.close();
+            JOptionPane.showMessageDialog(null, "Documento creado con exito");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"error"+e);
+        }
+        }
+        
+        
+        //Document documento = new Document();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
