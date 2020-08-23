@@ -148,10 +148,11 @@ public class Métodos {
             
         }else{
             factor = Double.parseDouble(frmPrincipal.lblTotal.getText())*(0.65+(0.01*sumFactor));
+            JOptionPane.showMessageDialog(null,"Factor" +factor);
            // df.format(factor);
            //BigDecimal bd = new BigDecimal(factor);
                 //bd = bd.setScale(2, RoundingMode.HALF_UP);
-            BigDecimal factorF =   r(factor);
+         BigDecimal factorF =   r(factor);
         frmPrincipal.lblTotalPFA.setText(""+factorF);
         }
         
@@ -267,25 +268,27 @@ public class Métodos {
         double prodMi;
         BigDecimal prodMif;
         double rely = Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
-        double data= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
-        double docu= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
-        double cplx= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
-        double time= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
-        double store= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
-        double pvol= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
-        double acap= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
-        double aexp= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
-        double pcap= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
-        double pexp= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
-        double ltex= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
-        double pcon= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
-        double tool= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
-        double site= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
-        double sced= Double.parseDouble((String)frmFactoresfuerzo.cbxRely.getSelectedItem());
-        prodMi = rely*data*docu*cplx*time*store*pvol*acap*aexp*pcap*pexp*ltex*pcon*tool*site*sced;
+        double data= Double.parseDouble((String)frmFactoresfuerzo.cbxData.getSelectedItem());
+        double docu= Double.parseDouble((String)frmFactoresfuerzo.cbxDocu.getSelectedItem());
+        double cplx= Double.parseDouble((String)frmFactoresfuerzo.cbxCplx.getSelectedItem());
+        double ruse = Double.parseDouble((String)frmFactoresfuerzo.cbxRuse.getSelectedItem());
+        double time= Double.parseDouble((String)frmFactoresfuerzo.cbxTime.getSelectedItem());
+        double store= Double.parseDouble((String)frmFactoresfuerzo.cbxStore.getSelectedItem());
+        double pvol= Double.parseDouble((String)frmFactoresfuerzo.cbxPvol.getSelectedItem());
+        double acap= Double.parseDouble((String)frmFactoresfuerzo.cbxAcap.getSelectedItem());
+        double aexp= Double.parseDouble((String)frmFactoresfuerzo.cbxAexp.getSelectedItem());
+        double pcap= Double.parseDouble((String)frmFactoresfuerzo.cbxPcap.getSelectedItem());
+        double pexp= Double.parseDouble((String)frmFactoresfuerzo.cbxPexp.getSelectedItem());
+        double ltex= Double.parseDouble((String)frmFactoresfuerzo.cbxLtex.getSelectedItem());
+        double pcon= Double.parseDouble((String)frmFactoresfuerzo.cbxPcom.getSelectedItem());
+        double tool= Double.parseDouble((String)frmFactoresfuerzo.cbxTool.getSelectedItem());
+        double site= Double.parseDouble((String)frmFactoresfuerzo.cbxSite.getSelectedItem());
+        double sced= Double.parseDouble((String)frmFactoresfuerzo.cbxSced.getSelectedItem());
+        prodMi = rely*data*docu*cplx*ruse*time*store*pvol*acap*aexp*pcap*pexp*ltex*pcon*tool*site*sced;
         //prodR = Math.round(prodMi*100)/100;
         prodMif = r(prodMi);
         frmPrincipal.lblMi.setText(""+prodMif);
+       // JOptionPane.showMessageDialog(null, "Factor Complejo"+prodMif);
     }
     
     //Calculo de factor de Esfuerzo
@@ -293,7 +296,7 @@ public class Métodos {
         double A = 2.94;
         double b = calcularB();
         //System.out.println("el valor de b es "+b);
-        double mi = Double.parseDouble(frmPrincipal.lblFi.getText());
+        double mi = Double.parseDouble(frmPrincipal.lblMi.getText());
         double esfuerzo;
         double lin = (Double.parseDouble(frmPrincipal.lblKsloc.getText()));
         esfuerzo = A *Math.pow(lin,b)*mi;
@@ -302,19 +305,11 @@ public class Métodos {
         //JOptionPane.showMessageDialog(null, "Esfurzo ="+esfuerzo);
         //imprimiendo en pantalla
         frmPrincipal.lblEsfuerzo.setText(""+esfuerzoF+" Per./mes");
-        
         //tiempoD_cantidadP(esfuerzo);
-        
-        
-        
         double factorEscala = Double.parseDouble(frmPrincipal.lblFi.getText());//obtengo factor escala de la vista principal
-        
         //para pruebas
         BigDecimal tiempoDesarrollo = tiempoD_cantidadP(esfuerzo,factorEscala);
-        
-        
         return esfuerzo;
-  
     }
     
     public BigDecimal tiempoD_cantidadP(double esfuerzo, double factorEsacla){
@@ -322,15 +317,15 @@ public class Métodos {
          //tiempoDes = 3.76*Math.pow(esfuerzo, 0.28+0.002*(Double.parseDouble(frmPrincipal.lblFi.getText())));
          tiempoDes = 3.76*Math.pow(esfuerzo, 0.28+0.002*(factorEsacla));
          BigDecimal tiempoDesf = r(tiempoDes );
-        //frmPrincipal.lblTiempoD.setText(""+tiempoDesf+" meses");
+        frmPrincipal.lblTiempoD.setText(""+tiempoDesf+" meses");
         
         
          double cantidadPersonas;
          cantidadPersonas = esfuerzo/tiempoDes;
          BigDecimal cantidadPersonasf =r(cantidadPersonas);
-       // frmPrincipal.lblCantidadP.setText(cantidadPersonasf+" personas");
+        frmPrincipal.lblCantidadP.setText(cantidadPersonasf+" personas");
          
-        // calculoCosto(tiempoDes, cantidadPersonas);
+         calculoCosto(tiempoDes, cantidadPersonas);
          
          //para pruebas
          return tiempoDesf;
@@ -382,6 +377,9 @@ public class Métodos {
         costoTotal= Double.parseDouble(frmPrincipal.txtFSueldo.getText())*(Double.parseDouble(frmPrincipal.lblTiempoD.getText())*1.25)*(Double.parseDouble(frmPrincipal.lblCantidadP.getText()))+imprevitos;
         frmPrincipal.lblCosto.setText(""+costoTotal);*/
     }
+    
+    
+    
     
     
    /* public double calculoFi(){
@@ -446,7 +444,10 @@ public class Métodos {
        
     }*/
     
-            
+     
+    
+    
+    
      public void bloqueLetras(java.awt.event.KeyEvent evt){
      char F1 = evt.getKeyChar();
         if (Character.isLetter(F1)){
