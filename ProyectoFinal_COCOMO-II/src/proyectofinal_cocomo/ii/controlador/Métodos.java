@@ -289,8 +289,8 @@ public class Métodos {
      *
      * @return retorna como valor el cálculo de la variable b.
      */
-    public double calcularB() {
-        double b = 0.91 + (0.01 * Double.parseDouble(frmPrincipal.lblFi.getText()));
+    public double calcularB(double Fi) {
+        double b = 0.91 + (0.01 * Fi);
         //JOptionPane.showMessageDialog(null, "el numero es: "+b);
         return b;
     }
@@ -336,7 +336,8 @@ public class Métodos {
      */
     public double calculoEsfuerzo() {
         double A = 2.94;
-        double b = calcularB();
+        //Para calcular b le envio factor escala
+        double b = calcularB(Double.parseDouble(frmPrincipal.lblFi.getText()));
         //System.out.println("el valor de b es "+b);
         double mi = Double.parseDouble(frmPrincipal.lblMi.getText());
         double esfuerzo;
@@ -459,5 +460,10 @@ public class Métodos {
             evt.consume();
             JOptionPane.showMessageDialog(null, "El espacio esta vacio");
         }
+        if(F1>32&F1<47){
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "No se permiten simbolos");
+        }
     }
+    
 }

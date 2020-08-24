@@ -997,6 +997,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtF2ActionPerformed
 
     private void txtFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFKeyTyped
+
         met.bloqueLetras(evt);
     }//GEN-LAST:event_txtFKeyTyped
 
@@ -1012,8 +1013,14 @@ public class frmPrincipal extends javax.swing.JFrame {
      * 
      */
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-         met.datos();
+        // Verifica que no existan campos vacios
+      if((txtF.getText().length() !=0 ) && (txtF2.getText().length() !=0 )&& (txtF3.getText().length() !=0 )
+              && (txtF4.getText().length() !=0 )&& (txtF5.getText().length() !=0 )&& (txtF6.getText().length() !=0 )
+              && (txtF7.getText().length() !=0 )&& (txtF8.getText().length() !=0 )&& (txtF9.getText().length() !=0 )
+              && (txtF10.getText().length() !=0 )&& (txtF11.getText().length() !=0 )&& (txtF12.getText().length() !=0 )
+              && (txtF13.getText().length() !=0 )&& (txtF14.getText().length() !=0 )&& (txtF15.getText().length() !=0 )){
+          
+        met.datos();
         jButton9.setEnabled(false);
         
         txtF.setEditable(false); txtF2.setEditable(false);txtF3.setEditable(false);txtF4.setEditable(false);txtF5.setEditable(false); txtF6.setEditable(false);
@@ -1021,6 +1028,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         txtF13.setEditable(false);txtF14.setEditable(false);txtF15.setEditable(false);
         
         jButton2.setEnabled(true);
+      }else{
+          
+            JOptionPane.showMessageDialog(null, "Existen campos vacios");
+      }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void txtFtipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFtipoActionPerformed

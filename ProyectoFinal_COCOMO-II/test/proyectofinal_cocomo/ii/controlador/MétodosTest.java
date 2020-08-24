@@ -132,6 +132,19 @@ public class MétodosTest {
         
     }
     
+    /**
+     * Test para verificar el calculo de la variable b
+     */
+    @Test
+    public void testFactorB(){
+        
+        double Fi =18.98;
+        
+        double  b = met.calcularB(Fi);
+        Assert.assertEquals("1.0998", b+"");
+        
+    }
+    
     
     
 }
