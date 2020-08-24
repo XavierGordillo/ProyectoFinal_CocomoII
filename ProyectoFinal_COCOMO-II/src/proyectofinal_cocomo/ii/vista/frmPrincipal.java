@@ -452,7 +452,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        cbxLen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JAVA", "C", "C++", "C#", "COBOL", "PYTHON", "PHP", "ENSAMBLADOR", "PASCAL", "ADA", "LENGUAJES 4TA G.", "LENGUAJES OO.", "LENGUAJES  GRÁFICOS", " " }));
+        cbxLen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JAVA", "C", "C++", "C#", "COBOL", "ENSAMBLADOR", "PASCAL", "ADA", "LENGUAJES 4TA G.", "LENGUAJES OO.", "LENGUAJES  GRÁFICOS", " " }));
         cbxLen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxLenActionPerformed(evt);
@@ -919,22 +919,31 @@ public class frmPrincipal extends javax.swing.JFrame {
             Document doc = new Document();
             PdfWriter.getInstance(doc, archivo);
             doc.open();
-            Paragraph título = new Paragraph("Estimación de Costo Puntos de Función \n\n",
-                    FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.BLUE));
+            Paragraph título = new Paragraph("Estimación de Costos - Puntos de Función \n\n",
+                    FontFactory.getFont("Times New Roman", 22, Font.BOLD, BaseColor.BLUE));
+            título.setAlignment(Paragraph.ALIGN_CENTER);
+            Paragraph nombre = new Paragraph("Nombre: "+txtFnombre.getText());
+            Paragraph tipo = new Paragraph("Tipo: "+txtFtipo.getText());
+            Paragraph modulo = new Paragraph("Módulo: "+txtFmodulo.getText()+"\n\n");
+            
             doc.add(título);
-            PdfPTable tabla = new PdfPTable(10);
-            tabla.addCell("Nombre");
-            tabla.addCell("Tipo");
-            tabla.addCell("Módulo");
+            doc.add(nombre);
+            doc.add(tipo);
+            doc.add(modulo);
+            PdfPTable tabla = new PdfPTable(7);
+            tabla.setWidths(new float[] { 20, 20, 20, 20,20,20,20});
+            //tabla.addCell("Nombre");
+            //tabla.addCell("Tipo");
+            //tabla.addCell("Módulo");
             tabla.addCell("PFSA");
             tabla.addCell("PFA");
-            tabla.addCell("KSLOC");tabla.addCell("Esfuezo");
+            tabla.addCell("KSLOC");tabla.addCell("Esfuerzo");
             tabla.addCell("T. Desarrollo");tabla.addCell("# Personas");tabla.addCell("Costo");
                 for (int i = 0; i < datosReporte.size(); i++) {
                     //tabla.addCell(""+i);
-                        tabla.addCell(datosReporte.get(i).getNombre());
-                        tabla.addCell(datosReporte.get(i).getTipo());
-                        tabla.addCell(datosReporte.get(i).getModulo());
+                        //tabla.addCell(datosReporte.get(i).getNombre());
+                        //tabla.addCell(datosReporte.get(i).getTipo());
+                        //tabla.addCell(datosReporte.get(i).getModulo());
                         tabla.addCell(datosReporte.get(i).getPf());
                         tabla.addCell(datosReporte.get(i).getPfa());
                         tabla.addCell(datosReporte.get(i).getKsloc());
